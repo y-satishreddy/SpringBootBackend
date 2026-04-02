@@ -56,4 +56,12 @@ public class CategoryServiceImplTest {
         CategoryGetCategoryResponseDTO response=categoryService.getCategory(id);
         assertEquals("satish",response.getName());
     }
+
+    @Test
+    public void testCategoryNotFoundException() {
+        Long id=1;
+        when(categoryRepository.findById(id)).thenReturn(Optional.empty());
+        Exception exception=assertThrows(CategoryNotFoundException.class,() -> {categoryService.getCategory(id)};
+        assertEquals("Category Not Found",exception.getMessage());
+    }
 }
