@@ -61,7 +61,7 @@ public class CategoryServiceImplTest {
     public void testCategoryNotFoundException() {
         Long id=1;
         when(categoryRepository.findById(id)).thenReturn(Optional.empty());
-        Exception exception=assertThrows(CategoryNotFoundException.class,() -> {categoryService.getCategory(id)};
+        Exception exception=assertThrows(CategoryNotFoundException.class,() -> categoryService.getCategory(id));
         assertEquals("Category Not Found",exception.getMessage());
     }
 }
