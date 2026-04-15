@@ -30,15 +30,56 @@ public class ProductServiceImpl implements ProductService {
 
         return productMapper.toGetDetailsResponse(repoProduct);
     }
-    public ProductGetProductResponseDTO partialProductUpdateDTO(Long id, PartialUpdateProductDTO partialUpdateProductDTO){
-        Product repoProduct = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found with id : " + id));
+   public ProductGetProductResponseDTO partialUpdateProduct(
+        Long id,
+        ProductPartialUpdateDTO dto
+) {
+    Product repoProduct = productRepository.findById(id)
+            .orElseThrow(() ->
+                    new ProductNotFoundException("Product not found with id : " + id));
 
-        if(partialUpdateProductDTO.getName()!=null){
-            repoProduct.setName(partialUpdateProductDTO.getName());
+    if (dto.getName() != null) {
+        repoProduct.setName(dto.getName());
     }
-        if(partialUpdateProductDTO.getSlug()!=null){
-        repoproduct.setSlug(partialUpdateProductDTO.getSlug());
-        }
-        Product updatedProduct=productRepository.save(repoProduct);
-        return productMapper.toGetDetailsResponse(updatedProduct);
+
+    if (dto.getSlug() != null) {
+        repoProduct.setSlug(dto.getSlug());
+    }
+
+    if (dto.getCategoryId() != null) {
+        repoProduct.setCategoryId(dto.getCategoryId());
+    }
+
+    if (dto.getBrandName() != null) {
+        repoProduct.setBrandName(dto.getBrandName());
+    }
+
+    if (dto.getPrice() != null) {
+        repoProduct.setPrice(dto.getPrice());
+    }
+
+    if (dto.getMrp() != null) {
+        repoProduct.setMrp(dto.getMrp());
+    }
+
+    if (dto.getShortDescription() != null) {
+        repoProduct.setShortDescription(dto.getShortDescription());
+    }
+
+    if (dto.getLongDescription() != null) {
+        repoProduct.setLongDescription(dto.getLongDescription());
+    }
+
+    if (dto.getActive() != null) {
+        repoProduct.setActive(dto.getActive());
+    }
+
+    if (dto.getFeatured() != null) {
+        repoProduct.setFeatured(dto.getFeatured());
+    }
+
+    Product updatedProduct = productRepository.save(repoProduct);
+
+    return productMapper.toGetDetailsResponse(updatedProduct);
+}
 }
