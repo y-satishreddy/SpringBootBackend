@@ -38,4 +38,18 @@ public class ProductController {
         logger.info("Product details returned for id = {}", id);
         return response;
     }
+   @PatchMapping("/{id}")
+public ResponseEntity<ProductGetProductResponseDTO> partialUpdateProduct(
+        @PathVariable Long id,
+        @RequestBody ProductPartialUpdateDTO productPartialUpdateDTO
+) {
+    logger.info("PATCH /products called with id = {}", id);
+
+    ProductGetProductResponseDTO response =
+            productService.partialUpdateProduct(id, productPartialUpdateDTO);
+
+    logger.info("Product updated successfully with id = {}", id);
+
+    return ResponseEntity.ok(response);
+}
 }
