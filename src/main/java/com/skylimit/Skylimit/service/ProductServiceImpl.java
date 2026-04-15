@@ -30,4 +30,15 @@ public class ProductServiceImpl implements ProductService {
 
         return productMapper.toGetDetailsResponse(repoProduct);
     }
+    public ProductGetProductResponseDTO partialProductUpdateDTO(Long id, PartialUpdateProductDTO partialUpdateProductDTO){
+        Product repoProduct = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found with id : " + id));
+
+        if(partialUpdateProductDTO.getName()!=null){
+            repoProduct.setName(partialUpdateProductDTO.getName());
+    }
+        if(partialUpdateProductDTO.getSlug()!=null){
+        repoproduct.setSlug(partialUpdateProductDTO.getSlug());
+        }
+        Product updatedProduct=productRepository.save(repoProduct);
+        return productMapper.toGetDetailsResponse(updatedProduct);
 }
