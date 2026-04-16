@@ -52,4 +52,11 @@ public ResponseEntity<ProductGetProductResponseDTO> partialUpdateProduct(
 
     return ResponseEntity.ok(response);
 }
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductGetProductResponseDTO> updateProduct(@PathVariable Long id, @RequestBody ProductUpdateRequest produtUpdateRequest){
+        logger.info("PUT /products is called with id = {}", id);
+        ProductGetProductResponseDTO response=productService.updateProduct(id,productUpdateRequest);
+        logger.info("Product updated successfully with id = {}", id);
+        return ResponseEntity.ok(response);
+    }
 }
