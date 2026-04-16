@@ -82,4 +82,12 @@ public class ProductServiceImpl implements ProductService {
 
     return productMapper.toGetDetailsResponse(updatedProduct);
 }
+    public ProductGetProductResponseDTO updateProduct(Long id, ProductUpdateRequest productUpdateRequest){
+    Product repoProduct=productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found with id : " + id));
+    repoProduct.setName(dto.getName());
+     repoProduct.setSlug(dto.getSlug());
+        Product response=productRepository.save(repoProduct);
+        return productMapper.toGetDetailsResponse(response);
+    }
+    
 }
