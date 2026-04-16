@@ -8,4 +8,5 @@ public interface ProductService {
     public ProductAddProductResponseDTO saveProduct(ProductAddProductRequestDTO productDTO);
     public ProductGetProductResponseDTO getProduct(Long id);
     public ProductGetProductResponseDTO partialUpdateProduct(Long id, ProductPartialUpdateDTO productPartialUpdateDTO);
+    public ProductGetProductResponseDTO updateProduct(Long id, UpdateProductRequest updateProductRequest);
 }
